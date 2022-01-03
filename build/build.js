@@ -30,24 +30,33 @@ let bottomCount = 0;
 
 headDropdown.addEventListener('change', async() => {
     // increment the correct count in state
-
+    headCount++;
     // update the head in supabase with the correct data
-    refreshData();
+    console.log(headDropdown.value);
+    await updateHead(headDropdown.value);
+
+    refreshData(); // does this >> displayStats(); x fetchAndDisplayCharacter();
 });
 
 
 middleDropdown.addEventListener('change', async() => {
     // increment the correct count in state
-    
+    middleCount++;
     // update the middle in supabase with the correct data
+    console.log(middleDropdown.value);
+    await updateMiddle(middleDropdown.value);
+
     refreshData();
 });
 
 
 bottomDropdown.addEventListener('change', async() => {
     // increment the correct count in state
-    
+    bottomCount++;
     // update the bottom in supabase with the correct data
+    console.log(bottomDropdown.value);
+    await updateBottom(bottomDropdown.value);
+
     refreshData();
 });
 
@@ -63,9 +72,17 @@ catchphraseButton.addEventListener('click', async() => {
 });
 
 window.addEventListener('load', async() => {
-    let character;
+    let character = {
+        head: 'bird',
+        middle: 'blue',
+        bottom: 'single leg',
+        catchphrases: []
+    };
     // on load, attempt to fetch this user's character
-
+    const userCharacter = await getCharacter();
+    if (!userCharacter) {
+        await createCharacter(character);
+    }
     // if this user turns out not to have a character
     // create a new character with correct defaults for all properties (head, middle, bottom, catchphrases)
     // and put the character's catchphrases in state (we'll need to hold onto them for an interesting reason);
@@ -85,12 +102,15 @@ function displayStats() {
 
 
 async function fetchAndDisplayCharacter() {
-    // fetch the caracter from supabase
-
+    // fetch the character from supabase
+    const character = await getCharacter(); 
+    console.log(character);
     // if the character has a head, display the head in the dom
+
     // if the character has a middle, display the middle in the dom
+
     // if the character has a pants, display the pants in the dom
-    
+
     // loop through catchphrases and display them to the dom (clearing out old dom if necessary)
 }
 
