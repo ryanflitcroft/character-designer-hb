@@ -26,7 +26,6 @@ let bottomCount = 0;
 
 headDropdown.addEventListener('change', async() => {
     headCount++;
-    // await updateHead(headDropdown.value);
     await updateCharacter('head', headDropdown.value);
 
     refreshData();
@@ -35,7 +34,6 @@ headDropdown.addEventListener('change', async() => {
 
 middleDropdown.addEventListener('change', async() => {
     middleCount++;
-    // await updateMiddle(middleDropdown.value);
     await updateCharacter('middle', middleDropdown.value);
 
     refreshData();
@@ -44,7 +42,6 @@ middleDropdown.addEventListener('change', async() => {
 
 bottomDropdown.addEventListener('change', async() => {
     bottomCount++;
-    // await updateBottom(bottomDropdown.value);
     await updateCharacter('bottom', bottomDropdown.value);
 
     refreshData();
@@ -85,20 +82,14 @@ function displayStats() {
     reportEl.textContent = `In this session, you have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
 }
 
-
-
 async function fetchAndDisplayCharacter() {
     const character = await getCharacter(); 
 
-    if (character.head) {
-        headEl.style.backgroundImage = `url(../assets/${character.head}-head.png)`;
-    }
-    if (character.middle) {
-        middleEl.style.backgroundImage = `url(../assets/${character.middle}-middle.png)`;
-    }
-    if (character.bottom) {
-        bottomEl.style.backgroundImage = `url(../assets/${character.bottom}-pants.png)`;
-    }
+    headEl.style.backgroundImage = `url(../assets/${character.head}-head.png)`;
+
+    middleEl.style.backgroundImage = `url(../assets/${character.middle}-middle.png)`;
+
+    bottomEl.style.backgroundImage = `url(../assets/${character.bottom}-pants.png)`;
 
     catchphrasesEl.textContent = '';
     for (let catchphrase of character.catchphrases) {
