@@ -86,7 +86,7 @@ window.addEventListener('load', async() => {
     // if this user turns out not to have a character
     // create a new character with correct defaults for all properties (head, middle, bottom, catchphrases)
     // and put the character's catchphrases in state (we'll need to hold onto them for an interesting reason);
-
+    
     // then call the refreshData function to set the DOM with the updated data
     refreshData();
 });
@@ -106,11 +106,20 @@ async function fetchAndDisplayCharacter() {
     const character = await getCharacter(); 
     console.log(character);
     // if the character has a head, display the head in the dom
-
+    if (character.head) {
+        // console.log(character.head);
+        headEl.style.backgroundImage = `url(../assets/${character.head}-head.png)`;
+    }
     // if the character has a middle, display the middle in the dom
-
+    if (character.middle) {
+        // console.log(character.middle);
+        middleEl.style.backgroundImage = `url(../assets/${character.middle}-middle.png)`;
+    }
     // if the character has a pants, display the pants in the dom
-
+    if (character.bottom) {
+        // console.log(character.bottom);
+        bottomEl.style.backgroundImage = `url(../assets/${character.bottom}-pants.png)`;
+    }
     // loop through catchphrases and display them to the dom (clearing out old dom if necessary)
 }
 
