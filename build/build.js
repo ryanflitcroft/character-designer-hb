@@ -6,7 +6,7 @@ import {
     updateBottom,
     updateHead,
     updateMiddle,
-    updateChatchphrases
+    updateCatchphrases
 } from '../fetch-utils.js';
 
 checkAuth();
@@ -27,6 +27,8 @@ const logoutButton = document.getElementById('logout');
 let headCount = 0;
 let middleCount = 0;
 let bottomCount = 0;
+
+let catchphrasesArr = [];
 
 headDropdown.addEventListener('change', async() => {
     // increment the correct count in state
@@ -61,13 +63,16 @@ bottomDropdown.addEventListener('change', async() => {
 });
 
 catchphraseButton.addEventListener('click', async() => {
-    catchphraseInput.value = '';
 
     // go fetch the old catch phrases
-    
+    const character = await getCharacter();
+    console.log(character);
     // update the catchphrases array locally by pushing the new catchphrase into the old array
-
+    catchphrasesArr.push(catchphraseInput.value);
+    console.log(catchphrasesArr);
+    updateCatchphrases(catchphrasesArr);
     // update the catchphrases in supabase by passing the mutated array to the updateCatchphrases function
+    catchphraseInput.value = '';
     refreshData();
 });
 
@@ -76,8 +81,9 @@ window.addEventListener('load', async() => {
         head: 'bird',
         middle: 'blue',
         bottom: 'single leg',
-        catchphrases: []
+        catchphrases: catchphrasesArr
     };
+    console.log(catchphrasesArr);
     // on load, attempt to fetch this user's character
     const userCharacter = await getCharacter();
     if (!userCharacter) {
@@ -86,7 +92,7 @@ window.addEventListener('load', async() => {
     // if this user turns out not to have a character
     // create a new character with correct defaults for all properties (head, middle, bottom, catchphrases)
     // and put the character's catchphrases in state (we'll need to hold onto them for an interesting reason);
-    
+
     // then call the refreshData function to set the DOM with the updated data
     refreshData();
 });
