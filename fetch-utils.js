@@ -3,76 +3,29 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function createCharacter(character){
+export async function createCharacter(){
     const newCharacter = await client
         .from('characters')
-        .insert([character]);
+        .insert([{
+            head: 'bird',
+            middle: 'blue',
+            bottom: 'leg',
+            catchphrases: []
+        }]);
 
     return checkError(newCharacter);
 }
 
-export async function updateHead(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ head: value })
-        .match({ user_id: currentUserId })
-        .single();
-
-    return checkError(response);    
-}
-
-
-export async function updateMiddle(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ middle: value })
-        .match({ user_id: currentUserId })
-        .single();
-
-    return checkError(response);    
-}
-
-
-export async function updateBottom(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ bottom: value })
-        .match({ user_id: currentUserId })
-        .single();
-
-    return checkError(response);    
-}
-
-export async function updateCatchphrases(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client 
-        .from('characters')
-        .update({ catchphrases: value })
-        .match({ user_id: currentUserId })
-        .single();
-
-    return checkError(response);    
-}
-
-
-/*
-CHALLENGE: how would you use this function? which functions would it replace? what's going on with the brackets in the update() arguments?
-
 export async function updateCharacter(part, value){
-    const currentUserId = client.auth.user().id;
+    const character = await getCharacter();
 
     const response = await client
         .from('characters')
         .update({ [part]: value })
-        .match({ user_id: currentUserId });
+        .match({ id: character.id });
 
     return checkError(response);    
 }
-*/
-
 
 export async function getCharacter() {
     const response = await client
