@@ -4,47 +4,33 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function createCharacter(character){
-    const newCharacter = {
-        ...character, 
-        // user_id: client.auth.user().id, 
-        
-    };
-
-    // use the newCharacter to create a single new character for this user in supabase
-    const dbCharacter = await client
+    const newCharacter = await client
         .from('characters')
-        .insert([newCharacter]);
+        .insert([character]);
 
-    return checkError(dbCharacter);
+    return checkError(newCharacter);
 }
 
 export async function updateHead(value){
     const currentUserId = client.auth.user().id;
-    // const user = await getUser();
-    // console.log(currentUserId);
-    // in supabase, update the head property
     const response = await client
         .from('characters')
         .update({ head: value })
         .match({ user_id: currentUserId })
         .single();
 
-    // for the character whose user_id match's the currently logged in user's id
     return checkError(response);    
 }
 
 
 export async function updateMiddle(value){
     const currentUserId = client.auth.user().id;
-
-    // in supabase, update the middle property
     const response = await client
         .from('characters')
         .update({ middle: value })
         .match({ user_id: currentUserId })
         .single();
 
-    // for the character whose user_id match's the currently logged in user's id
     return checkError(response);    
 }
 
@@ -57,21 +43,16 @@ export async function updateBottom(value){
         .match({ user_id: currentUserId })
         .single();
 
-    // in supabase, update the bottom property
-    // for the character whose user_id match's the currently logged in user's id
     return checkError(response);    
 }
 
 export async function updateCatchphrases(value){
     const currentUserId = client.auth.user().id;
-
-    // in supabase, update the catchphrases property
     const response = await client 
         .from('characters')
         .update({ catchphrases: value })
         .match({ user_id: currentUserId })
         .single();
-    // for the character whose user_id match's the currently logged in user's id
 
     return checkError(response);    
 }

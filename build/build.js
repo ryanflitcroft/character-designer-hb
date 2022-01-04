@@ -51,14 +51,12 @@ bottomDropdown.addEventListener('change', async() => {
 });
 
 catchphraseButton.addEventListener('click', async() => {
-    // go fetch the old catch phrases
     const character = await getCharacter();
-    // update the catchphrases array locally by pushing the new catchphrase into the old array
+
     const newCatchphrase = catchphraseInput.value;
     character.catchphrases.push(newCatchphrase);
     await updateCatchphrases(character.catchphrases);
-    console.log(character)
-    // update the catchphrases in supabase by passing the mutated array to the updateCatchphrases function
+
     catchphraseInput.value = '';
     refreshData();
 });
@@ -67,7 +65,7 @@ window.addEventListener('load', async() => {
     let character = {
         head: 'bird',
         middle: 'blue',
-        bottom: 'single leg',
+        bottom: 'leg',
         catchphrases: []
     };
 
@@ -75,8 +73,6 @@ window.addEventListener('load', async() => {
     if (!userCharacter) {
         await createCharacter(character);
     }
-
-    // and put the character's catchphrases in state (we'll need to hold onto them for an interesting reason);
 
     refreshData();
 });
@@ -103,14 +99,13 @@ async function fetchAndDisplayCharacter() {
     if (character.bottom) {
         bottomEl.style.backgroundImage = `url(../assets/${character.bottom}-pants.png)`;
     }
-    // loop through catchphrases and display them to the dom (clearing out old dom if necessary)
+
     catchphrasesEl.textContent = '';
     for (let catchphrase of character.catchphrases) {
         const p = document.createElement('p');
         p.textContent = catchphrase;
         catchphrasesEl.append(p);
     }
-
 }
 
 function refreshData() {
