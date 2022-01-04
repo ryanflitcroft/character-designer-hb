@@ -64,6 +64,11 @@ window.addEventListener('load', async() => {
         await createCharacter();
     }
 
+    headDropdown.value = userCharacter.head;
+    middleDropdown.value = userCharacter.middle;
+    bottomDropdown.value = userCharacter.bottom;
+
+
     refreshData();
 });
 
