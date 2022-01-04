@@ -11,40 +11,40 @@ export async function createCharacter(character){
     return checkError(newCharacter);
 }
 
-export async function updateHead(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ head: value })
-        .match({ user_id: currentUserId })
-        .single();
+// export async function updateHead(value){
+//     const currentUserId = client.auth.user().id;
+//     const response = await client
+//         .from('characters')
+//         .update({ head: value })
+//         .match({ user_id: currentUserId })
+//         .single();
 
-    return checkError(response);    
-}
-
-
-export async function updateMiddle(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ middle: value })
-        .match({ user_id: currentUserId })
-        .single();
-
-    return checkError(response);    
-}
+//     return checkError(response);    
+// }
 
 
-export async function updateBottom(value){
-    const currentUserId = client.auth.user().id;
-    const response = await client
-        .from('characters')
-        .update({ bottom: value })
-        .match({ user_id: currentUserId })
-        .single();
+// export async function updateMiddle(value){
+//     const currentUserId = client.auth.user().id;
+//     const response = await client
+//         .from('characters')
+//         .update({ middle: value })
+//         .match({ user_id: currentUserId })
+//         .single();
 
-    return checkError(response);    
-}
+//     return checkError(response);    
+// }
+
+
+// export async function updateBottom(value){
+//     const currentUserId = client.auth.user().id;
+//     const response = await client
+//         .from('characters')
+//         .update({ bottom: value })
+//         .match({ user_id: currentUserId })
+//         .single();
+
+//     return checkError(response);    
+// }
 
 export async function updateCatchphrases(value){
     const currentUserId = client.auth.user().id;
@@ -58,8 +58,8 @@ export async function updateCatchphrases(value){
 }
 
 
-/*
-CHALLENGE: how would you use this function? which functions would it replace? what's going on with the brackets in the update() arguments?
+
+// CHALLENGE: how would you use this function? which functions would it replace? what's going on with the brackets in the update() arguments?
 
 export async function updateCharacter(part, value){
     const currentUserId = client.auth.user().id;
@@ -71,7 +71,7 @@ export async function updateCharacter(part, value){
 
     return checkError(response);    
 }
-*/
+
 
 
 export async function getCharacter() {

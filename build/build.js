@@ -3,10 +3,11 @@ import {
     getCharacter,
     logout, 
     createCharacter,
-    updateBottom,
-    updateHead,
-    updateMiddle,
-    updateCatchphrases
+    // updateBottom,
+    // updateHead,
+    // updateMiddle,
+    updateCatchphrases,
+    updateCharacter
 } from '../fetch-utils.js';
 
 checkAuth();
@@ -29,7 +30,8 @@ let bottomCount = 0;
 
 headDropdown.addEventListener('change', async() => {
     headCount++;
-    await updateHead(headDropdown.value);
+    // await updateHead(headDropdown.value);
+    await updateCharacter('head', headDropdown.value);
 
     refreshData();
 });
@@ -37,7 +39,8 @@ headDropdown.addEventListener('change', async() => {
 
 middleDropdown.addEventListener('change', async() => {
     middleCount++;
-    await updateMiddle(middleDropdown.value);
+    // await updateMiddle(middleDropdown.value);
+    await updateCharacter('middle', middleDropdown.value);
 
     refreshData();
 });
@@ -45,7 +48,8 @@ middleDropdown.addEventListener('change', async() => {
 
 bottomDropdown.addEventListener('change', async() => {
     bottomCount++;
-    await updateBottom(bottomDropdown.value);
+    // await updateBottom(bottomDropdown.value);
+    await updateCharacter('bottom', bottomDropdown.value);
 
     refreshData();
 });
