@@ -17,12 +17,12 @@ export async function createCharacter(){
 }
 
 export async function updateCharacter(part, value){
-    const currentUserId = client.auth.user().id;
+    const character = await getCharacter();
 
     const response = await client
         .from('characters')
         .update({ [part]: value })
-        .match({ user_id: currentUserId });
+        .match({ id: character.id });
 
     return checkError(response);    
 }

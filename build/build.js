@@ -68,7 +68,6 @@ window.addEventListener('load', async() => {
     middleDropdown.value = userCharacter.middle;
     bottomDropdown.value = userCharacter.bottom;
 
-
     refreshData();
 });
 
@@ -82,7 +81,7 @@ function displayStats() {
 
 async function fetchAndDisplayCharacter() {
     const character = await getCharacter(); 
-
+    console.log(character);
     headEl.style.backgroundImage = `url(../assets/${character.head}-head.png)`;
 
     middleEl.style.backgroundImage = `url(../assets/${character.middle}-middle.png)`;
