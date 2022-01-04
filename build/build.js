@@ -3,10 +3,6 @@ import {
     getCharacter,
     logout, 
     createCharacter,
-    // updateBottom,
-    // updateHead,
-    // updateMiddle,
-    updateCatchphrases,
     updateCharacter
 } from '../fetch-utils.js';
 
@@ -59,7 +55,7 @@ catchphraseButton.addEventListener('click', async() => {
 
     const newCatchphrase = catchphraseInput.value;
     character.catchphrases.push(newCatchphrase);
-    await updateCatchphrases(character.catchphrases);
+    await updateCharacter('catchphrases', character.catchphrases);
 
     catchphraseInput.value = '';
     refreshData();
