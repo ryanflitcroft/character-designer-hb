@@ -3,10 +3,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function createCharacter(character){
+export async function createCharacter(){
     const newCharacter = await client
         .from('characters')
-        .insert([character]);
+        .insert([{
+            head: 'bird',
+            middle: 'blue',
+            bottom: 'leg',
+            catchphrases: []
+        }]);
 
     return checkError(newCharacter);
 }

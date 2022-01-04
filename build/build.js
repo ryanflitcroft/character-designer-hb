@@ -59,16 +59,9 @@ catchphraseButton.addEventListener('click', async() => {
 });
 
 window.addEventListener('load', async() => {
-    let character = {
-        head: 'bird',
-        middle: 'blue',
-        bottom: 'leg',
-        catchphrases: []
-    };
-
     const userCharacter = await getCharacter();
     if (!userCharacter) {
-        await createCharacter(character);
+        await createCharacter();
     }
 
     refreshData();
